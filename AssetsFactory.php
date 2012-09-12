@@ -20,7 +20,7 @@ class AssetsFactory implements FactoryInterface {
 	
 	public function createService(ServiceLocatorInterface $serviceLocator) {
 
-		$configuration	= $serviceLocator->get('ApplicationConfig');
+		$configuration	= $serviceLocator->get('Config');
 		
 		$serviceLocator->setFactory("AssetsFilterManager", new AssetsFilterManagerFactory());
 		
