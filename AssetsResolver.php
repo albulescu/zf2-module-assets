@@ -67,16 +67,16 @@ class AssetsResolver implements AssetsResolverInterface {
 		
 		$mime = $finfo->file($file);
 		
-		$info = new \SplFileInfo($file);
-		
 		unset($finfo);
+				
+		$extension = strtolower(end(explode(".",$file)));
 				
 		switch( $mime )	
 		{
 			case "text/plain":
 			case "text/x-php":
 				
-				switch($info->getExtension()) {
+				switch( $extension ) {
 					case "css":
 						$asset = new CssAsset($file, "text/css");
 						break;
