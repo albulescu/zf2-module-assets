@@ -20,3 +20,12 @@ Configuration
 		),
 		'cache' => 'Cache'
 	)
+
+Rendered asset
+--------------
+
+	.box {
+		width:100px;
+	}
+	
+	<?php echo $this->render("other-cssfile"); ?>
