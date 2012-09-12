@@ -21,11 +21,33 @@ Configuration
 		'cache' => 'Cache'
 	)
 
-Rendered asset
---------------
-
+Rendered asset ( css or js )
+----------------------------
+	<?php $size = 100; ?>
+	
 	.box {
-		width:100px;
+		width:<?php echo $size; ?>px;
+	}
+	
+	.style {
+		height:200px;
 	}
 	
 	<?php echo $this->render("other-cssfile"); ?>
+	
+Accessing the assets
+--------------------
+	Folder path
+	
+	/assets/css/style.css
+	/assets/css/other/box.css
+	/assets/js/main.js
+	/assets/js/jquery/plugin.js
+	/assets/images/pic.jpg
+	
+	Url
+	/assets/style.css
+	/assets/other/box.css
+	/assets/main.js
+	/assets/jquery/plugin.js
+	/assets/pic.jpg
