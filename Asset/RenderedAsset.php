@@ -1,4 +1,14 @@
 <?php 
+/**
+ *
+ * Albulescu Cosmin ( http://www.albulescu.com/ )
+ *
+ * @link      http://www.albulescu.com/
+ * @copyright Copyright (c) 2012 Albulescu Cosmin. (http://www.albulescu.com)
+ * @license   http://www.albulescu.ro/new-bsd New BSD License
+ * @autor Albulescu Cosmin <cosmin@albulescu.ro>
+ *
+ */
 
 namespace Assets\Asset;
 
@@ -7,6 +17,7 @@ use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\Renderer\PhpRenderer;
 
 class RenderedAsset extends GenericAsset {
+	
 	/* (non-PHPdoc)
 	 * @see \Assets\Asset\AssetInterface::getContent()
 	*/

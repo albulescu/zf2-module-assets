@@ -1,6 +1,18 @@
 <?php
-use Zend\ServiceManager\ServiceManager;
+/**
+ *
+ * Albulescu Cosmin ( http://www.albulescu.com/ )
+ *
+ * @link      http://www.albulescu.com/
+ * @copyright Copyright (c) 2012 Albulescu Cosmin. (http://www.albulescu.com)
+ * @license   http://www.albulescu.ro/new-bsd New BSD License
+ * @autor Albulescu Cosmin <cosmin@albulescu.ro>
+ *
+ */
+
 namespace Assets;
+
+use Zend\ServiceManager\ServiceManager;
 
 use Zend\Stdlib\ArrayUtils;
 
@@ -49,6 +61,7 @@ class AssetsManager {
 	 */
 	protected $serviceLocator;
 	
+	
 	public function __construct( $options, $serviceLocator )
 	{
 		$this->serviceLocator = $serviceLocator;
@@ -58,6 +71,10 @@ class AssetsManager {
 		}
 	}
 	
+	/**
+	 * @param AssetsOptions $options
+	 * @throws \RuntimeException
+	 */
 	public function setOptions($options) {
 		
 		if(!($options instanceof AssetsOptions) && ! ArrayUtils::hasStringKeys($options)) {
@@ -88,6 +105,7 @@ class AssetsManager {
 		}
 	}
 	
+	
 	/**
 	 * Set the asset resolver
 	 * @param AssetsResolverInterface $resolver
@@ -116,6 +134,11 @@ class AssetsManager {
 	}
 	
 	
+	/**
+	 * @param string $request Request uri
+	 * @throws \RuntimeException
+	 * @return \Zend\Http\PhpEnvironment\Response
+	 */
 	public function dispatch( $request ) {
 
 		if(!$this->getResolver()) {
@@ -178,6 +201,7 @@ class AssetsManager {
 		return $response;
 	}
 	
+	
 	/**
 	 * Add fiter
 	 * @param string $forAssetClass
@@ -196,9 +220,14 @@ class AssetsManager {
 		$this->filters[$forAssetClass][] = $filter;
 	}
 	
+	
+	/**
+	 * @param  $cache
+	 */
 	public function setCache($cache) {
-		
+		//TODO: Cache
 	}
+	
 	
 	/**
 	 * Test if file is cached

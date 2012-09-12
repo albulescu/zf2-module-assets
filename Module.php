@@ -1,4 +1,15 @@
 <?php
+/**
+ *
+ * Albulescu Cosmin ( http://www.albulescu.com/ )
+ *
+ * @link      http://www.albulescu.com/
+ * @copyright Copyright (c) 2012 Albulescu Cosmin. (http://www.albulescu.com)
+ * @license   http://www.albulescu.ro/new-bsd New BSD License
+ * @autor Albulescu Cosmin <cosmin@albulescu.ro>
+ *
+ */
+
 
 namespace Assets;
 
@@ -14,15 +25,10 @@ use Zend\Mvc\MvcEvent;
 
 class Module {
 	
-	/**
-	 * @var RouteStackInterface
-	 */
-	protected $router;
-	
 	public function onBootstrap(MvcEvent $e) {
 		$app = $e->getApplication();
 		$sm = $app->getServiceManager();
-		$this->router = $sm->get('Router');
+		$router = $sm->get('Router');
 		
 		$sm->setFactory("AssetsManager", new AssetsFactory());
 
@@ -34,7 +40,7 @@ class Module {
 			'action'=>'index'		
 		));
 		
-		$this->router->addRoute("assets", $route);
+		$router->addRoute("assets", $route);
 	}
 
 	public function getAutoloaderConfig()
