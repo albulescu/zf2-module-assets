@@ -29,6 +29,7 @@ class AssetsFilterManager extends AbstractPluginManager {
 	
 	protected $filters = array(
         'CssCompressorFilter'=>'Assets\Filter\CssCompressorFilter',
+		'LessFilter'=>'Assets\Filter\LessFilter',
 		'JsMinFilter'=>'Assets\Filter\JsMinFilter',
 		'PackerFilter'=>'Assets\Filter\PackerFilter'
     );
