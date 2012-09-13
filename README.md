@@ -38,7 +38,6 @@ Rendered asset ( css or js )
 Accessing the assets
 --------------------
 	Folder path
-	
 	/assets/css/style.css
 	/assets/css/other/box.css
 	/assets/js/main.js
