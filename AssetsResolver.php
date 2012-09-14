@@ -52,21 +52,23 @@ class AssetsResolver implements AssetsResolverInterface {
 
 		$file = null;
 		
+		$request = '/' . ltrim($request,'/');
+		
 		foreach($this->namespaces as $namespace => $path)
 		{
 			if($namespace != 'default') {
 
 				//if the namespace not found in this request do not resolve
-				if(strpos($request, $namespace) != 0) {
+				if(strpos($request, $namespace) != 1) {
 					continue;
 				}
 				
 				//remove the namspace from request
-				$request = substr($request, strlen($namespace));
+				$request = substr($request, strlen($namespace) + 1);
 			}
 			
-			if(file_exists($path . DIRECTORY_SEPARATOR . $request)) {
-				$file = $path . DIRECTORY_SEPARATOR . $request;
+			if(file_exists($path . $request)) {
+				$file = $path . $request;
 				break;
 			}
 			
@@ -74,8 +76,8 @@ class AssetsResolver implements AssetsResolverInterface {
 			
 			foreach($dirIterator as $item) {
 				if(!$item->isDot() && $item->isDir()) {
-					if(file_exists($item->getRealPath() . DIRECTORY_SEPARATOR . $request)) {
-						$file = $item->getRealPath() . DIRECTORY_SEPARATOR . $request;
+					if(file_exists($item->getRealPath() . $request)) {
+						$file = $item->getRealPath() . $request;
 						break;
 					}
 				}
