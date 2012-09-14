@@ -19,9 +19,8 @@ use Assets\Asset\JsAsset;
 use Assets\Asset\GenericAsset;
 
 class AssetsResolver implements AssetsResolverInterface {
-	
-	protected $paths = array();
-	
+
+	protected $namespaces = array();
 	
 	public function __construct( $path = null ) {
 		if($path)
@@ -37,7 +36,11 @@ class AssetsResolver implements AssetsResolverInterface {
 			throw new \RuntimeException("Directory is not readable");
 		}
 		
-		$this->paths[] = $path;
+		if(null === $namespace) {
+			$namespace = "default";
+		}
+		
+		$this->namespaces[$namespace] = $path;
 	}
 	
 	/**
@@ -49,8 +52,24 @@ class AssetsResolver implements AssetsResolverInterface {
 
 		$file = null;
 		
-		foreach($this->paths as $path)
+		foreach($this->namespaces as $namespace => $path)
 		{
+			if($namespace != 'default') {
+
+				//if the namespace not found in this request do not resolve
+				if(strpos($request, $namespace) != 0) {
+					continue;
+				}
+				
+				//remove the namspace from request
+				$request = substr($request, strlen($namespace));
+			}
+			
+			if(file_exists($path . DIRECTORY_SEPARATOR . $request)) {
+				$file = $path . DIRECTORY_SEPARATOR . $request;
+				break;
+			}
+			
 			$dirIterator = new \DirectoryIterator($path);
 			
 			foreach($dirIterator as $item) {
