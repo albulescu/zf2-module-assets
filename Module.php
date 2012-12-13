@@ -13,14 +13,6 @@
 
 namespace Assets;
 
-use Zend\Mvc\Router\Http\Wildcard;
-
-use Zend\Mvc\Router\Http\Segment;
-
-use Zend\Mvc\Router\Http\Literal;
-
-use Zend\Mvc\Router\RouteStackInterface;
-
 use Zend\Mvc\MvcEvent;
 
 class Module {
