@@ -22,8 +22,6 @@ class AssetsFactory implements FactoryInterface {
 
 		$configuration	= $serviceLocator->get('Config');
 		
-		$serviceLocator->setFactory("AssetsFilterManager", new AssetsFilterManagerFactory());
-		
 		$options		= new AssetsOptions( $configuration['assets'] );
 		$manager		= new AssetsManager($options, $serviceLocator);
 		

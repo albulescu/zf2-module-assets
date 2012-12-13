@@ -12,6 +12,8 @@
 
 namespace Assets;
 
+use Zend\Mvc\Router\Http\Segment;
+
 use Zend\ServiceManager\ServiceManager;
 
 use Zend\Stdlib\ArrayUtils;
@@ -83,6 +85,19 @@ class AssetsManager {
 		if(is_array($options)) {
 			$options = new AssetsOptions($options);
 		}
+		
+		//Set the controller resolver
+		$controllerLoader = $this->serviceLocator->get("ControllerLoader");
+		$controllerLoader->setInvokableClass("AssetsController", "Assets\AssetsController");
+		
+		//Set the route
+		$router = $this->serviceLocator->get('Router');
+		$route = new Segment($options->getRoute(),array('asset'=>'.*'), array(
+			'controller'=>'AssetsController',
+			'action'=>'index'		
+		));
+		$router->addRoute("assets", $route);
+		
 		
 		$filterManager = $this->serviceLocator->get('AssetsFilterManager');
 		

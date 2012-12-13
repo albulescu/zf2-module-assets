@@ -34,6 +34,26 @@ class AssetsOptions extends AbstractOptions {
 	
 	
 	/**
+	 * @var The route options
+	 */
+	protected $route;
+	
+	/**
+	 * Set the route for rendering assets
+	 * @param array $route
+	 */
+	public function setRoute($route) {
+		$this->route = $route;
+	}
+	
+	/**
+	 * Get route for rendering assets
+	 */
+	public function getRoute() {
+		return $this->route;
+	}
+	
+	/**
 	 * Get the list of added paths
 	 * 
 	 * @return array

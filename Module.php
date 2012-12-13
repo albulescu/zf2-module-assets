@@ -26,23 +26,25 @@ use Zend\Mvc\MvcEvent;
 class Module {
 	
 	public function onBootstrap(MvcEvent $e) {
-		$app = $e->getApplication();
-		$sm = $app->getServiceManager();
-		$router = $sm->get('Router');
 		
+		$sm = $e->getApplication()->getServiceManager();
+		
+		$sm->setFactory("AssetsFilterManager",new AssetsFilterManagerFactory());
 		$sm->setFactory("AssetsManager", new AssetsFactory());
-
-		$controllerLoader = $sm->get("ControllerLoader");
-		$controllerLoader->setInvokableClass("AssetsController", "Assets\AssetsController");
-		
-		$route = new Segment("/assets[/:asset]",array('asset'=>'.*'), array(
-			'controller'=>'AssetsController',
-			'action'=>'index'		
-		));
-		
-		$router->addRoute("assets", $route);
 	}
 
+	public function getViewHelperConfig()
+	{
+		return array(
+				'factories' => array(
+						// the array key here is the name you will call the view helper by in your view scripts
+						'asset' => function($sm){
+							return new AssetLoaderHelper();
+						},
+				),
+		);
+	}
+	
 	public function getAutoloaderConfig()
 	{
 		return array(
